@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CineGraph · Neo4j Movies RAG</title>
+<meta name="description" content="Retrieval-Augmented Generation over the Neo4j Movies knowledge graph - AML23702 Lab Exercise 3">
+<meta name="theme-color" content="#12100d">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><circle cx="8" cy="9" r="4"/><circle cx="24" cy="9" r="4"/><circle cx="16" cy="24" r="4"/><path d="M8 9 16 24 24 9 8 9"/></svg>
+    </div>
+    <div>
+      <h1>CineGraph</h1>
+      <p class="sub">RAG over the Neo4j Movies knowledge graph</p>
+    </div>
+  </div>
+  <div class="chips" id="status">
+    <span class="chip"><i class="dot"></i>connecting…</span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="ask" role="tab">Ask</button>
+  <button class="tab" data-tab="schema" role="tab">Graph schema</button>
+  <button class="tab" data-tab="templates" role="tab">Cypher templates</button>
+  <button class="tab" data-tab="eval" role="tab">Evaluation</button>
+  <button class="tab" data-tab="about" role="tab">Pipeline</button>
+</nav>
+
+<main>
+  <!-- ASK -->
+  <section id="tab-ask" class="panel active">
+    <div id="chat" class="chat" aria-live="polite">
+      <div class="msg bot intro">
+        <div class="bubble">
+          <p>Ask me anything about the <b>38 movies</b> and <b>133 people</b> in the Neo4j Movies graph. Each answer comes from a Cypher query, and you can open any answer to see how it was produced.</p>
+        </div>
+      </div>
+    </div>
+    <div class="suggest" id="suggest"></div>
+    <form id="ask" class="composer" autocomplete="off">
+      <input id="q" type="text" placeholder="e.g. Who directed The Matrix?" maxlength="500" aria-label="Question">
+      <button type="submit" id="send" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M4 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+    <div class="composer-meta">
+      <label class="toggle" id="llmToggleWrap" hidden><input type="checkbox" id="useLlm" checked> Use LLM for generation</label>
+      <button class="link" id="reset" type="button">New conversation</button>
+    </div>
+  </section>
+
+  <!-- SCHEMA -->
+  <section id="tab-schema" class="panel">
+    <div class="card">
+      <h2>Knowledge graph schema</h2>
+      <p class="muted">Property graph loaded from the official <code>:play movies</code> dataset.</p>
+      <svg class="schema" viewBox="0 0 640 300" role="img" aria-label="Schema: Person ACTED_IN, DIRECTED, WROTE, PRODUCED, REVIEWED Movie; Person FOLLOWS Person">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="arrowhead"/></marker></defs>
+        <circle cx="140" cy="150" r="62" class="n-person"/>
+        <text x="140" y="146" class="n-label">Person</text>
+        <text x="140" y="166" class="n-props">name · born</text>
+        <circle cx="500" cy="150" r="62" class="n-movie"/>
+        <text x="500" y="146" class="n-label">Movie</text>
+        <text x="500" y="166" class="n-props">title · released</text>
+        <text x="500" y="180" class="n-props">tagline</text>
+        <path d="M200 120 Q320 40 440 120" class="edge" marker-end="url(#arr)"/><text x="320" y="66" class="e-label">ACTED_IN {roles}</text>
+        <path d="M204 138 Q320 100 436 138" class="edge" marker-end="url(#arr)"/><text x="320" y="110" class="e-label">DIRECTED</text>
+        <path d="M204 160 L436 160" class="edge" marker-end="url(#arr)"/><text x="320" y="153" class="e-label">WROTE</text>
+        <path d="M204 180 Q320 216 436 180" class="edge" marker-end="url(#arr)"/><text x="320" y="200" class="e-label">PRODUCED</text>
+        <path d="M200 196 Q320 280 440 196" class="edge" marker-end="url(#arr)"/><text x="320" y="252" class="e-label">REVIEWED {rating, summary}</text>
+        <path d="M100 100 C40 20 200 20 160 92" class="edge" marker-end="url(#arr)"/><text x="122" y="30" class="e-label">FOLLOWS</text>
+      </svg>
+      <div class="stats" id="schemaStats"></div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section id="tab-templates" class="panel">
+    <div class="card">
+      <h2>Cypher query templates</h2>
+      <p class="muted">Each question is mapped to one parameterised, read-only template. Parameters (<code>$title</code>, <code>$name</code>…) are filled by entity linking, never by string concatenation. That prevents Cypher injection.</p>
+    </div>
+    <div id="tplList" class="tpl-list"></div>
+  </section>
+
+  <!-- EVAL -->
+  <section id="tab-eval" class="panel">
+    <div class="card">
+      <h2>Evaluation</h2>
+      <p class="muted">38 labelled questions: direct, paraphrased, typo, partial-name, multi-turn, out-of-graph and 8 deliberately hard compositional questions.</p>
+      <div class="row">
+        <button class="btn" id="runEval">Run evaluation</button>
+        <label class="toggle" id="evalLlmWrap" hidden><input type="checkbox" id="evalLlm"> with LLM answers</label>
+      </div>
+      <div id="evalSummary" class="metrics"></div>
+    </div>
+    <div id="evalTable"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="tab-about" class="panel">
+    <div class="card">
+      <h2>How an answer is produced</h2>
+      <ol class="flow">
+        <li><b>Entity linking.</b> Movie titles and person names are matched against every node in the graph: exact, ignoring "The", first or last name alone, and fuzzy matching for typos.</li>
+        <li><b>Dialogue state.</b> "it", "he" or "she" resolve to the movie or person from the previous turn, so follow-up questions work.</li>
+        <li><b>Intent → Cypher.</b> Keyword rules plus the linked entity types select one of 17 Cypher templates and fill its parameters.</li>
+        <li><b>Graph retrieval.</b> The query runs on Neo4j AuraDB when it is configured. Otherwise it runs on an identical in-memory replica of the same dataset.</li>
+        <li><b>Grounded generation.</b> The LLM gets only the retrieved records and is told not to use outside knowledge. Without an API key, a template generator writes the answer from the same records.</li>
+        <li><b>Open questions.</b> If no template fits and Neo4j plus an LLM are available, the LLM writes a Cypher query. It is checked to be read-only before it runs.</li>
+      </ol>
+      <p class="muted small">AML23702 Advanced NLP · Lab Exercise 3 · Vignesh N (1GA23AI056) · Global Academy of Technology</p>
+    </div>
+  </section>
+</main>
+
+<script src="graph.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>

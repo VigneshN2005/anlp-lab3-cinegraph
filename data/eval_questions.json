@@ -1,0 +1,425 @@
+[
+ {
+  "q": "Who directed The Matrix?",
+  "intent": "movie_directors",
+  "entities": [
+   "The Matrix"
+  ],
+  "gold": [
+   "Lana Wachowski",
+   "Lilly Wachowski"
+  ]
+ },
+ {
+  "q": "who was the director of apollo 13",
+  "intent": "movie_directors",
+  "entities": [
+   "Apollo 13"
+  ],
+  "gold": [
+   "Ron Howard"
+  ]
+ },
+ {
+  "q": "Who wrote A Few Good Men?",
+  "intent": "movie_writers",
+  "entities": [
+   "A Few Good Men"
+  ],
+  "gold": [
+   "Aaron Sorkin"
+  ]
+ },
+ {
+  "q": "Who produced The Matrix?",
+  "intent": "movie_producers",
+  "entities": [
+   "The Matrix"
+  ],
+  "gold": [
+   "Joel Silver"
+  ]
+ },
+ {
+  "q": "Who acted in Apollo 13?",
+  "intent": "movie_cast",
+  "entities": [
+   "Apollo 13"
+  ],
+  "gold": [
+   "Tom Hanks",
+   "Kevin Bacon",
+   "Ed Harris",
+   "Bill Paxton",
+   "Gary Sinise"
+  ]
+ },
+ {
+  "q": "Give me the cast of Top Gun",
+  "intent": "movie_cast",
+  "entities": [
+   "Top Gun"
+  ],
+  "gold": [
+   "Tom Cruise",
+   "Kelly McGillis",
+   "Val Kilmer",
+   "Anthony Edwards",
+   "Tom Skerritt",
+   "Meg Ryan"
+  ]
+ },
+ {
+  "q": "When was Top Gun released?",
+  "intent": "movie_info",
+  "entities": [
+   "Top Gun"
+  ],
+  "gold": [
+   "1986"
+  ]
+ },
+ {
+  "q": "What is the tagline of Apollo 13?",
+  "intent": "movie_info",
+  "entities": [
+   "Apollo 13"
+  ],
+  "gold": [
+   "Houston, we have a problem."
+  ]
+ },
+ {
+  "q": "When was Tom Hanks born?",
+  "intent": "person_info",
+  "entities": [
+   "Tom Hanks"
+  ],
+  "gold": [
+   "1956"
+  ]
+ },
+ {
+  "q": "how old is charlize theron",
+  "intent": "person_info",
+  "entities": [
+   "Charlize Theron"
+  ],
+  "gold": [
+   "1975"
+  ]
+ },
+ {
+  "q": "Which movies did Hugo Weaving act in?",
+  "intent": "person_movies",
+  "entities": [
+   "Hugo Weaving"
+  ],
+  "gold": [
+   "The Matrix",
+   "The Matrix Reloaded",
+   "The Matrix Revolutions",
+   "V for Vendetta",
+   "Cloud Atlas"
+  ]
+ },
+ {
+  "q": "What movies has Ron Howard directed?",
+  "intent": "person_directed",
+  "entities": [
+   "Ron Howard"
+  ],
+  "gold": [
+   "Apollo 13",
+   "Frost/Nixon",
+   "The Da Vinci Code"
+  ]
+ },
+ {
+  "q": "What did Nora Ephron write?",
+  "intent": "person_wrote",
+  "entities": [
+   "Nora Ephron"
+  ],
+  "gold": [
+   "When Harry Met Sally"
+  ]
+ },
+ {
+  "q": "Who played Neo?",
+  "intent": "who_played_role",
+  "entities": [],
+  "gold": [
+   "Keanu Reeves"
+  ]
+ },
+ {
+  "q": "Who played John Coffey?",
+  "intent": "who_played_role",
+  "entities": [],
+  "gold": [
+   "Michael Clarke Duncan"
+  ]
+ },
+ {
+  "q": "What role did Tom Hanks play in The Green Mile?",
+  "intent": "person_role_in_movie",
+  "entities": [
+   "Tom Hanks",
+   "The Green Mile"
+  ],
+  "gold": [
+   "Paul Edgecomb"
+  ]
+ },
+ {
+  "q": "Which movies have Tom Hanks and Meg Ryan done together?",
+  "intent": "shared_movies",
+  "entities": [
+   "Tom Hanks",
+   "Meg Ryan"
+  ],
+  "gold": [
+   "Joe Versus the Volcano",
+   "Sleepless in Seattle",
+   "You've Got Mail"
+  ]
+ },
+ {
+  "q": "Who has acted with Keanu Reeves?",
+  "intent": "co_actors",
+  "entities": [
+   "Keanu Reeves"
+  ],
+  "gold": [
+   "Carrie-Anne Moss",
+   "Laurence Fishburne",
+   "Hugo Weaving"
+  ]
+ },
+ {
+  "q": "Movies released in 2003",
+  "intent": "movies_by_year",
+  "entities": [],
+  "gold": [
+   "Something's Gotta Give",
+   "The Matrix Reloaded",
+   "The Matrix Revolutions"
+  ]
+ },
+ {
+  "q": "Which films came out after 2008?",
+  "intent": "movies_by_year",
+  "entities": [],
+  "gold": [
+   "Ninja Assassin",
+   "Cloud Atlas"
+  ]
+ },
+ {
+  "q": "What are the reviews for The Da Vinci Code?",
+  "intent": "reviews",
+  "entities": [
+   "The Da Vinci Code"
+  ],
+  "gold": [
+   "A solid romp",
+   "Fun, but a little far fetched"
+  ]
+ },
+ {
+  "q": "What are the top rated movies?",
+  "intent": "top_rated",
+  "entities": [],
+  "gold": [
+   "Cloud Atlas",
+   "Jerry Maguire",
+   "Unforgiven"
+  ]
+ },
+ {
+  "q": "Recommend movies similar to The Matrix",
+  "intent": "recommend",
+  "entities": [
+   "The Matrix"
+  ],
+  "gold": [
+   "The Matrix Reloaded",
+   "The Matrix Revolutions"
+  ]
+ },
+ {
+  "q": "How is Kevin Bacon connected to Keanu Reeves?",
+  "intent": "connection",
+  "entities": [
+   "Kevin Bacon",
+   "Keanu Reeves"
+  ],
+  "gold": [
+   "Kevin Bacon",
+   "Keanu Reeves"
+  ]
+ },
+ {
+  "q": "who directed the matrx",
+  "intent": "movie_directors",
+  "entities": [
+   "The Matrix"
+  ],
+  "gold": [
+   "Lana Wachowski",
+   "Lilly Wachowski"
+  ],
+  "tag": "typo"
+ },
+ {
+  "q": "when was keanu reves born",
+  "intent": "person_info",
+  "entities": [
+   "Keanu Reeves"
+  ],
+  "gold": [
+   "1964"
+  ],
+  "tag": "typo"
+ },
+ {
+  "q": "Which movies did Nicholson star in?",
+  "intent": "person_movies",
+  "entities": [
+   "Jack Nicholson"
+  ],
+  "gold": [
+   "A Few Good Men",
+   "As Good as It Gets",
+   "Hoffa",
+   "One Flew Over the Cuckoo's Nest",
+   "Something's Gotta Give"
+  ],
+  "tag": "partial name"
+ },
+ {
+  "q": "who directed it?",
+  "context": {
+   "movie": "Unforgiven"
+  },
+  "intent": "movie_directors",
+  "entities": [
+   "Unforgiven"
+  ],
+  "gold": [
+   "Clint Eastwood"
+  ],
+  "tag": "multi-turn"
+ },
+ {
+  "q": "and when was she born?",
+  "context": {
+   "person": "Meg Ryan"
+  },
+  "intent": "person_info",
+  "entities": [
+   "Meg Ryan"
+  ],
+  "gold": [
+   "1961"
+  ],
+  "tag": "multi-turn"
+ },
+ {
+  "q": "Who is the director of Inception?",
+  "intent": "unknown_entity",
+  "entities": [],
+  "gold": [],
+  "tag": "out-of-graph"
+ },
+ {
+  "q": "Which movie has the tagline 'Houston, we have a problem'?",
+  "intent": "keyword_search",
+  "entities": [],
+  "gold": [
+   "Apollo 13"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "Did Tom Hanks direct any movie?",
+  "intent": "person_directed",
+  "entities": [
+   "Tom Hanks"
+  ],
+  "gold": [
+   "That Thing You Do"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "Who directed both The Matrix and Cloud Atlas?",
+  "intent": "movie_directors",
+  "entities": [
+   "The Matrix",
+   "Cloud Atlas"
+  ],
+  "gold": [
+   "Lana Wachowski",
+   "Lilly Wachowski"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "What is the oldest movie in the graph?",
+  "intent": "movies_by_year",
+  "entities": [],
+  "gold": [
+   "One Flew Over the Cuckoo's Nest"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "Which actors in The Matrix were born before 1965?",
+  "intent": "movie_cast",
+  "entities": [
+   "The Matrix"
+  ],
+  "gold": [
+   "Laurence Fishburne",
+   "Hugo Weaving"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "Name a Rob Reiner film starring Tom Cruise",
+  "intent": "shared_movies",
+  "entities": [
+   "Rob Reiner",
+   "Tom Cruise"
+  ],
+  "gold": [
+   "A Few Good Men"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "What character did Laurence Fishburne portray?",
+  "intent": "person_movies",
+  "entities": [
+   "Laurence Fishburne"
+  ],
+  "gold": [
+   "Morpheus"
+  ],
+  "tag": "hard"
+ },
+ {
+  "q": "Who reviewed Jerry Maguire and what did they say?",
+  "intent": "reviews",
+  "entities": [
+   "Jerry Maguire"
+  ],
+  "gold": [
+   "Jessica Thompson",
+   "You had me at Jerry"
+  ],
+  "tag": "hard"
+ }
+]
