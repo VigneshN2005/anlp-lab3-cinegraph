@@ -13,7 +13,7 @@ import re
 import requests
 
 DEFAULT_BASE = "https://api.groq.com/openai/v1"
-DEFAULT_MODEL = "llama-3.3-70b-versatile"
+DEFAULT_MODEL = "openai/gpt-oss-120b"
 
 SYSTEM_ANSWER = """You are CineGraph, a movie assistant that answers ONLY from the
 knowledge-graph records provided (retrieved from a Neo4j movie graph).
@@ -62,7 +62,9 @@ def chat(system: str, user: str, temperature: float = 0.2, max_tokens: int = 400
 def generate_answer(question: str, intent: str, rows: list[dict]) -> str:
     context = json.dumps(rows[:25], ensure_ascii=False, default=str)
     user = f"Question: {question}\nDetected intent: {intent}\nRetrieved records (JSON):\n{context}\n\nAnswer:"
-    return chat(SYSTEM_ANSWER, user)
+    text = chat(SYSTEM_ANSWER, user)
+    # The UI shows plain text, so drop markdown emphasis the model may add
+    return re.sub(r"\*\*(.+?)\*\*", r"\1", text)
 
 
 def text_to_cypher(question: str) -> str:

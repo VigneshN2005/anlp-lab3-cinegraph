@@ -58,11 +58,11 @@ python -m core.evaluation
 4. Restart the app. The header chip will show **Graph: Neo4j**.
 
 ## Connect an LLM
-Set `LLM_API_KEY` in `.env`. The default is **Groq** (free key at <https://console.groq.com>) with `llama-3.3-70b-versatile`. Any OpenAI-compatible endpoint works by setting `LLM_BASE_URL` and `LLM_MODEL`:
+Set `LLM_API_KEY` in `.env`. The default is **Groq** (free key at <https://console.groq.com>) with `openai/gpt-oss-120b`. Any OpenAI-compatible endpoint works by setting `LLM_BASE_URL` and `LLM_MODEL`:
 
 | Provider | LLM_BASE_URL | example LLM_MODEL |
 |---|---|---|
-| Groq | `https://api.groq.com/openai/v1` | `llama-3.3-70b-versatile` |
+| Groq | `https://api.groq.com/openai/v1` | `openai/gpt-oss-120b` |
 | Google Gemini | `https://generativelanguage.googleapis.com/v1beta/openai` | `gemini-2.0-flash` |
 | OpenRouter | `https://openrouter.ai/api/v1` | `meta-llama/llama-3.3-70b-instruct` |
 
