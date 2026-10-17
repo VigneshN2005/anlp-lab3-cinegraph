@@ -28,6 +28,27 @@ from core.rag import answer  # noqa: E402
 from core.templates import TEMPLATES  # noqa: E402
 
 app = Flask(__name__, static_folder=str(ROOT / "public"), static_url_path="")
+
+
+class VercelPathFix:
+    """Vercel's rewrite (/api/(.*) -> /api/index.py?__route=$1) hands Flask the
+    internal path. Restore the original /api/<route> so the normal Flask routes
+    match. Requests that already carry the real path pass through unchanged."""
+
+    def __init__(self, wsgi_app):
+        self.wsgi_app = wsgi_app
+
+    def __call__(self, environ, start_response):
+        from urllib.parse import parse_qsl, urlencode
+        qs = parse_qsl(environ.get("QUERY_STRING", ""), keep_blank_values=True)
+        route = next((v for k, v in qs if k == "__route"), None)
+        if route is not None:
+            environ["PATH_INFO"] = "/api/" + route.lstrip("/")
+            environ["QUERY_STRING"] = urlencode([(k, v) for k, v in qs if k != "__route"])
+        return self.wsgi_app(environ, start_response)
+
+
+app.wsgi_app = VercelPathFix(app.wsgi_app)
 _EVAL_CACHE = {}
 
 
